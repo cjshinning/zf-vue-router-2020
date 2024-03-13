@@ -5,8 +5,9 @@ import router from './router/index';
 Vue.config.productionTip = false
 
 new Vue({
+  name: 'root',
   render: h => h(App),
-  router
+  router  //这里让所有的子组件都可以获取到router属性，而不是所有实例，所以没把它放在原型上
 }).$mount('#app')
 
 // 前端路由常见的两个方案 hash模式 #aa ##bb （丑）
