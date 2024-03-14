@@ -1,4 +1,5 @@
 import createRouteMap from './create-route-map'
+import { createRoute } from './history/base';
 
 export default function createMatcher(routes) {
   // pathList 会吧所有的路由 组成一个数组 ['/','/about','/about/a','/about/b']
@@ -6,8 +7,11 @@ export default function createMatcher(routes) {
   let { pathList, pathMap } = createRouteMap(routes);
   addRoutes([{ path: '/xxx', component: {} }])
   // console.log(pathList, pathMap);
-  function match() { //等会要提供用户输入的路径 获取对应的匹配记录
-
+  function match(location) { //等会要提供用户输入的路径 获取对应的匹配记录
+    let record = pathMap[location];
+    return createRoute(record, {
+      path: location
+    })
   }
   // 具备新增和添加的功能
   function addRoutes(routes) {  //routes动态添加的路由

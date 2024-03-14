@@ -20,7 +20,9 @@ export default class HashHistory extends History {
   }
   setupListener() {
     window.addEventListener('hashchange', () => {
-      console.log('hash变化');
+      // 再次执行匹配
+      this.transitionTo(this.getCurrentLocation());
+      // console.log('hash变化');
     })
   }
 }
