@@ -36,7 +36,7 @@ class VueRouter {
     // 只要current发生变化 就触发此函数
     history.listen((route) => {
       app._route = route; //更新试图的操作，当current变化后再次更新_route
-      console.log(app._route, '---------------------');
+      // console.log(app._route, '---------------------');
     });
 
     // transitionTo 跳转逻辑 hash browser都有

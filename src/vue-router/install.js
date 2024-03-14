@@ -33,6 +33,17 @@ const install = function (_Vue) {
       // console.log(this._routerRoot._router);
     }
   });
+  Object.defineProperty(Vue.prototype, '$route', {  //存放的都是path，match
+    get() {
+      return this._routerRoot && this._routerRoot._route;
+    }
+  })
+  Object.defineProperty(Vue.prototype, '$router', {  //存放的都是path，match
+    get() {
+      return this._routerRoot && this._routerRoot._router;
+    }
+  })
+
 }
 
 export default install;
