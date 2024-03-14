@@ -32,6 +32,13 @@ class VueRouter {
     // 跳转路径 进行监控
     history.transitionTo(history.getCurrentLocation(), setupHashListener);
 
+    // 初始化时都需要调用更新_route的方法 
+    // 只要current发生变化 就触发此函数
+    history.listen((route) => {
+      app._route = route; //更新试图的操作，当current变化后再次更新_route
+      console.log(app._route, '---------------------');
+    });
+
     // transitionTo 跳转逻辑 hash browser都有
     // getCurrentLocation hash和browser实现不一样
     // setupHashListener 

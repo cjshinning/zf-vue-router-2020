@@ -21,6 +21,9 @@ const install = function (_Vue) {
         this._router = this.$options.router;
         // 当前用户的router属性
         this._router.init(this);  //调用插件中的init方法
+
+        // 如果用户更改了current是没有效果的 需要把_route也进行更新
+        Vue.util.defineReactive(this, '_route', this._router.history.current);
       } else {
         // 儿子
         // console.log('儿子', this.$options.name);
