@@ -43,6 +43,10 @@ class VueRouter {
     // getCurrentLocation hash和browser实现不一样
     // setupHashListener 
   }
+  push(location) {
+    const history = this.history;
+    window.location.hash = location;
+  }
 }
 VueRouter.install = install;
 

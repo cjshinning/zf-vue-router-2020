@@ -19,7 +19,7 @@ export default {
     }
 
     let record = route.matched[depth];
-    console.log(context.props);
+    // console.log(context.props);
     if (!record) {
       return h(); //渲染一个空元素
     }
