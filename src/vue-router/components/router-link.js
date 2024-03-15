@@ -11,7 +11,8 @@ export default {
     }
   },
   render(h, context) {
-    let tag = context.tag || 'a';
+    console.log(context);
+    let tag = context.props.tag || 'a';
     const clickHandler = () => {
       context.parent.$router.push(context.props.to);
     }

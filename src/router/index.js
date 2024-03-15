@@ -31,7 +31,21 @@ let routes = [
   }
 ]
 
-export default new VueRouter({
+let router = new VueRouter({
   mode: 'hash',
   routes
 })
+router.beforeEach((to, from, next) => {
+  setTimeout(() => {
+    console.log('1.beforeEach');
+    next();
+  }, 1000)
+})
+router.beforeEach((to, from, next) => {
+  setTimeout(() => {
+    console.log('2.beforeEach');
+    next();
+  }, 2000)
+})
+
+export default router;

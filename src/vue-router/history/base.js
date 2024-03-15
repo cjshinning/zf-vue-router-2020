@@ -14,6 +14,17 @@ export const createRoute = (record, location) => {
   }
 }
 
+const runQueue = (queue, iterator, complete) => {
+  function next(index) {
+    if (index >= queue.length) {
+      return complete();
+    }
+    let hook = queue[index];
+    iterator(hook, () => next(index + 1));
+  }
+  next(0)
+}
+
 export default class History {
   constructor(router) {
     this.router = router;
@@ -37,12 +48,24 @@ export default class History {
     if (this.current.path == location && this.current.matched.length === current.matched.length) {
       return;
     }
-    // 用最新匹配到的结果去更新试图
-    this.current = current;
-    this.cb && this.cb(current);
 
-    // 当路径变化后 current属性会进行更新操作
-    complete && complete();
+    let queue = this.router.beforeHooks;
+    // console.log(queue);
+
+    const iterator = (hook, next) => {
+      hook(current, this.current, next);
+    }
+
+    runQueue(queue, iterator, () => {
+      // 用最新匹配到的结果去更新试图
+      this.current = current;
+      this.cb && this.cb(current);
+
+      // 当路径变化后 current属性会进行更新操作
+      complete && complete();
+    });
+
+
   }
   listen(cb) {
     this.cb = cb;

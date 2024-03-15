@@ -17,6 +17,7 @@ class VueRouter {
         this.history = new BrowserHistory(this);
         break;
     }
+    this.beforeHooks = [];
   }
   match(location) {
     return this.matcher.match(location);
@@ -46,6 +47,9 @@ class VueRouter {
   push(location) {
     const history = this.history;
     window.location.hash = location;
+  }
+  beforeEach(fn) {
+    this.beforeHooks.push(fn);
   }
 }
 VueRouter.install = install;
